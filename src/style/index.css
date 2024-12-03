@@ -1,0 +1,86 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root * {
+  font-family: Pretendard;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+#instruction > p {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+}
+
+#instruction strong {
+  color: black;
+  padding: 0.1rem 0.5rem;
+}
+
+#notion-file-input > input {
+  display: none;
+}
+
+#notion-file-input > strong {
+  background: rgba(0, 66, 255, 0.15);
+}
+
+#notion-file-input > label {
+  padding: 0.1rem 0.3rem;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#notion-file-input > label:hover {
+  font-size: 1rem;
+}
+
+#notion-file {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#notion-file > input {
+  display: none;
+}
+
+textarea {
+  border: 0;
+  box-shadow: 0px 5px 26px -2px rgb(0 0 0 / 15%);
+  border-radius: 22px;
+  max-width: 30rem;
+  width: 100%;
+  height: 20rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  outline: none;
+  resize: none;
+}
+
+#warning {
+  background: rgba(255, 0, 0, 0.15);
+}
