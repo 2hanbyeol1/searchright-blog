@@ -15,6 +15,8 @@ export function processDOM($article: HTMLElement): string {
   processCallouts($article);
   processLinks($article);
 
+  removeFirstBrs($article);
+
   return $article.outerHTML;
 }
 
@@ -62,14 +64,15 @@ function processImages($article: HTMLElement) {
 
 function processCallouts($article: HTMLElement) {
   $article.querySelectorAll(".callout").forEach(($figureCallout) => {
+    $figureCallout.removeAttribute("style");
+
     const $icon = $figureCallout.querySelector(
       ".icon"
     ) as HTMLDivElement | null;
     if (!$icon) return;
 
     const icon = $icon.innerText;
-    ($icon.parentNode as Element)?.remove();
-    $figureCallout.removeAttribute("style");
+    ($icon.parentNode as Element).remove();
 
     let $child: HTMLElement | null =
       $figureCallout.firstElementChild as HTMLElement;
@@ -90,4 +93,25 @@ function processLinks($article: HTMLElement) {
       $a.setAttribute("target", "_blank");
     }
   });
+}
+
+function removeFirstBrs($article: HTMLElement) {
+  const $pageBody = $article.querySelector(".page-body");
+  if (!$pageBody) return;
+
+  let attempts = 0;
+  const MAX_ATTEMPTS = 1000; // 안전장치
+
+  while (attempts < MAX_ATTEMPTS) {
+    const firstNode = $pageBody.firstChild;
+    if (!firstNode || !(firstNode instanceof HTMLBRElement)) {
+      break;
+    }
+    firstNode.remove();
+    attempts++;
+  }
+
+  if (attempts === MAX_ATTEMPTS) {
+    console.warn("최대 반복 횟수에 도달했습니다.");
+  }
 }
