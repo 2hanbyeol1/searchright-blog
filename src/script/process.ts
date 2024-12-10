@@ -96,10 +96,22 @@ function processLinks($article: HTMLElement) {
 }
 
 function removeFirstBrs($article: HTMLElement) {
-  while (true) {
-    const firstNode = $article.querySelector(".page-body")?.firstChild;
-    if (firstNode?.isEqualNode(document.createElement("br")))
-      firstNode?.remove();
-    else break;
+  const $pageBody = $article.querySelector(".page-body");
+  if (!$pageBody) return;
+
+  let attempts = 0;
+  const MAX_ATTEMPTS = 1000; // 안전장치
+
+  while (attempts < MAX_ATTEMPTS) {
+    const firstNode = $pageBody.firstChild;
+    if (!firstNode || !(firstNode instanceof HTMLBRElement)) {
+      break;
+    }
+    firstNode.remove();
+    attempts++;
+  }
+
+  if (attempts === MAX_ATTEMPTS) {
+    console.warn("최대 반복 횟수에 도달했습니다.");
   }
 }
