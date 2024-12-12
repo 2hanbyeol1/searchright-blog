@@ -7,8 +7,7 @@ const $notionFileInput =
 const $notionFile = document.getElementById("notion-file");
 
 $notionFile?.addEventListener("change", (e: Event) => {
-  const file = (e.target as HTMLInputElement)?.files?.[0];
-  if (!file) return;
+  const file = (e.target as HTMLInputElement)?.files?.[0] as File;
 
   (async () => {
     try {
@@ -30,10 +29,6 @@ $notionFile?.addEventListener("change", (e: Event) => {
 
 function readFileAsText(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
-    if (!file) {
-      reject(new Error("파일이 없습니다."));
-    }
-
     const reader = new FileReader();
     reader.readAsText(file);
 
@@ -44,7 +39,7 @@ function readFileAsText(file: File): Promise<string> {
     };
 
     reader.onerror = () => {
-      reject(new Error("파일을 읽는 도중 에러가 발생했습니다."));
+      reject(new Error(`${file.name} 파일을 읽는 도중 에러가 발생했습니다.`));
     };
   });
 }
