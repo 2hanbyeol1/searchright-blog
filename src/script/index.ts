@@ -11,16 +11,20 @@ $notionFile?.addEventListener("change", (e: Event) => {
   if (!file) return;
 
   (async () => {
-    let text = await readFileAsText(file).then((text) => processText(text));
+    try {
+      let text = await readFileAsText(file).then((text) => processText(text));
 
-    const $article = getArticleElementFromText(text);
-    if (!$article) return;
-    const processedHtml = processDOM($article);
+      const $article = getArticleElementFromText(text);
+      if (!$article) return;
+      const processedHtml = processDOM($article);
 
-    $textarea.value = processedHtml;
-    $textarea.readOnly = false;
-    updateWarningMessage(processedHtml);
-    $notionFileInput.style.display = "none";
+      $textarea.value = processedHtml;
+      $textarea.readOnly = false;
+      updateWarningMessage(processedHtml);
+      $notionFileInput.style.display = "none";
+    } catch (e) {
+      alert((e as Error).message);
+    }
   })();
 });
 
@@ -34,7 +38,9 @@ function readFileAsText(file: File): Promise<string> {
     reader.readAsText(file);
 
     reader.onload = (ev: ProgressEvent<FileReader>) => {
-      resolve(ev.target?.result as string);
+      const text = ev.target?.result as string;
+      if (!text) reject(new Error("파일의 내용이 없습니다."));
+      resolve(text);
     };
 
     reader.onerror = () => {
@@ -46,7 +52,13 @@ function readFileAsText(file: File): Promise<string> {
 function getArticleElementFromText(text: string) {
   const domparser = new DOMParser();
   const doc = domparser.parseFromString(text, "text/html");
-  return doc.querySelector("article");
+  const $article = doc.querySelector("article");
+  if (!$article) {
+    throw new Error(
+      "문서에서 article 요소를 찾을 수 없습니다. 노션에서 HTML로 내보낸 파일이 맞나요?"
+    );
+  }
+  return $article;
 }
 
 $textarea.addEventListener("keyup", () => {
