@@ -24,7 +24,7 @@ h1 {
   margin-bottom: 2rem;
 }
 
-#instruction > p {
+#instruction p {
   font-size: 0.9rem;
   padding: 0.3rem 0.5rem;
   color: rgba(0, 0, 0, 0.6);
@@ -36,15 +36,15 @@ h1 {
   padding: 0.1rem 0.5rem;
 }
 
-#notion-file-input > input {
+#instruction input {
   display: none;
 }
 
-#notion-file-input > strong {
+#instruction strong {
   background: rgba(0, 66, 255, 0.15);
 }
 
-#notion-file-input > label {
+#instruction label {
   padding: 0.1rem 0.3rem;
   color: black;
   border: 1px solid black;
@@ -53,18 +53,15 @@ h1 {
   cursor: pointer;
 }
 
-#notion-file-input > label:hover {
+#instruction label:hover {
   font-size: 1rem;
 }
 
-#notion-file {
+#instruction #notion-file {
   cursor: pointer;
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-#notion-file > input {
   display: none;
 }
 
