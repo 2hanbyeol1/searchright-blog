@@ -39,8 +39,8 @@ class MainPage extends Page {
     const { element: $fileUploader } = new FileUploader({
       text: "노션에서 HTML로 내보낸 파일을 업로드해주세요",
       onFileUpload: (e: Event) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-        const file = (e.target as HTMLInputElement)?.files?.[0]!;
+        const file = (e.target as HTMLInputElement)?.files?.[0];
+        if (!file) throw new Error("업로드된 파일이 없습니다");
         this.handleFileUpload(file);
       },
     });
@@ -53,16 +53,23 @@ class MainPage extends Page {
     return $main;
   }
 
-  handleFileUpload(file: File) {
-    readFileAsText(file, (text) => {
-      const document = parseHTMLTextToDocument(text);
+  async handleFileUpload(file: File) {
+    try {
+      let text = await readFileAsText(file);
       text = this.processText(text);
+      const document = parseHTMLTextToDocument(text);
       const processedHtml = this.processDom(document);
 
       setTextareaValue(processedHtml);
       hideFileUploader();
       updateWarningMessage(processedHtml);
-    });
+    } catch (e) {
+      alert(
+        e instanceof Error
+          ? e.message
+          : "파일 업로드 중, 알 수 없는 에러가 발생했습니다.",
+      );
+    }
   }
 
   processText(text: string) {
