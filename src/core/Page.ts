@@ -1,4 +1,5 @@
 import { IdType, PropType } from "@/types";
+
 import Component from "./Component";
 
 type PathType = string;

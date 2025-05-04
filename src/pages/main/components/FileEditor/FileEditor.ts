@@ -1,9 +1,10 @@
 import { ID } from "@/constants/element";
 import Component from "@/core/Component";
+import { getTextareaById } from "@/util/elementUtil";
+
 import { updateWarningMessage } from "../WarningText";
 
 import "./FileEditor.scss";
-import { getTextareaById } from "@/util/elementUtil";
 
 class FileEditor extends Component {
   constructor() {

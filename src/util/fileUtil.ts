@@ -1,6 +1,6 @@
 export function readFileAsText(
   file: File,
-  onSuccess: (text: string) => void
+  onSuccess: (text: string) => void,
 ): void {
   const reader = new FileReader();
   reader.readAsText(file);

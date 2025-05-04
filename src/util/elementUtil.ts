@@ -8,7 +8,7 @@ import ElementTypeError from "@/error/ElementTypeError";
 
 export function getElementBySelector(
   selector: string,
-  doc?: Document | Element
+  doc?: Document | Element,
 ) {
   const $element = (doc ?? document).querySelector(selector);
   if (!$element) throw new ElementNotFoundError(selector);

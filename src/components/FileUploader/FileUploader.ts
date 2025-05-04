@@ -1,8 +1,8 @@
 import { ID } from "@/constants/element";
 import Component from "@/core/Component";
+import { getDivById } from "@/util/elementUtil";
 
 import "./FileUploader.scss";
-import { getDivById } from "@/util/elementUtil";
 
 interface FileUploaderProps {
   text: string;

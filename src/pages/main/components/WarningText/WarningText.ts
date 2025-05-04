@@ -1,7 +1,8 @@
 import { ID } from "@/constants/element";
 import Component from "@/core/Component";
-import "./WarningText.scss";
 import { getDivById } from "@/util/elementUtil";
+
+import "./WarningText.scss";
 
 class WarningText extends Component {
   constructor() {

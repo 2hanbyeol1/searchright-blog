@@ -1,24 +1,26 @@
-import Title from "@/components/Title";
-import Page from "@/core/Page";
 import FileUploader, { hideFileUploader } from "@/components/FileUploader";
-import FileEditor, { setTextareaValue } from "./components/FileEditor";
-import WarningText, { updateWarningMessage } from "./components/WarningText";
+import Title from "@/components/Title";
+import { ID } from "@/constants/element";
 import PATH from "@/constants/path";
-import { readFileAsText } from "@/util/fileUtil";
+import Page from "@/core/Page";
 import {
   addBrTag,
   isHrefFromExternalSite,
   parseHTMLTextToDocument,
   processCallout,
   processImage,
+  removeFirstBrs,
 } from "@/util/domUtil";
 import { getElementBySelector } from "@/util/elementUtil";
-import { ID } from "@/constants/element";
+import { readFileAsText } from "@/util/fileUtil";
 import {
   removeBlankClasses,
   removeBlankPTags,
   removeIds,
 } from "@/util/stringUtil";
+
+import FileEditor, { setTextareaValue } from "./components/FileEditor";
+import WarningText, { updateWarningMessage } from "./components/WarningText";
 
 class MainPage extends Page {
   constructor() {
@@ -37,6 +39,7 @@ class MainPage extends Page {
     const { element: $fileUploader } = new FileUploader({
       text: "노션에서 HTML로 내보낸 파일을 업로드해주세요",
       onFileUpload: (e: Event) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         const file = (e.target as HTMLInputElement)?.files?.[0]!;
         this.handleFileUpload(file);
       },
@@ -84,6 +87,7 @@ class MainPage extends Page {
       if (isHrefFromExternalSite($e)) $e.setAttribute("target", "_blank");
     });
     $article.querySelectorAll(".callout").forEach(($e) => processCallout($e));
+    removeFirstBrs($article);
     return $article.outerHTML;
   }
 }

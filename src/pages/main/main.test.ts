@@ -4,6 +4,7 @@ import {
   getByTestId,
   getByText,
 } from "@testing-library/dom";
+
 import MainPage from "./page";
 
 let $container: HTMLElement;
