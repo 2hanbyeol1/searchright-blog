@@ -1,8 +1,7 @@
-import ElementNotFoundError from "./error/ElementNotFoundError";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/main/page";
+import { getDivById } from "./util/elementUtil";
 
-const root = document.body;
-if (!root) throw new ElementNotFoundError("body");
+const $app = getDivById("app");
+const { element: $mainPage } = new MainPage();
 
-const mainPage = new MainPage();
-root.appendChild(mainPage.$element);
+$app.appendChild($mainPage);

@@ -1,4 +1,7 @@
-import Component from "../Component";
+import { ID } from "@/constants/element";
+import Component from "@/core/Component";
+
+import "./Title.scss";
 
 interface TitleProps {
   title: string;
@@ -6,7 +9,7 @@ interface TitleProps {
 
 class Title extends Component {
   constructor(props: TitleProps) {
-    super(props);
+    super(ID.title, props);
   }
 
   render() {

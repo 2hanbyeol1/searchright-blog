@@ -4,7 +4,7 @@ import {
   getByTestId,
   getByText,
 } from "@testing-library/dom";
-import MainPage from "./MainPage";
+import MainPage from "./page";
 
 let $container: HTMLElement;
 let $element: HTMLElement;

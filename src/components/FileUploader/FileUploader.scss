@@ -1,0 +1,17 @@
+#file-uploader {
+  color: #343434;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 2rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  input {
+    display: none;
+  }
+}

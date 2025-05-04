@@ -13,7 +13,9 @@
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
+    "@types/node": "^22.15.3",
     "jsdom": "^26.0.0",
+    "sass-embedded": "^1.87.0",
     "typescript": "~5.6.2",
     "vite": "^5.4.10",
     "vitest": "^3.1.1"
