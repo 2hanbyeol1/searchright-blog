@@ -32,8 +32,8 @@ describe("메인 페이지", () => {
     });
 
     it("업로드 버튼이 렌더링된다", () => {
-      const uploadLabel = getByText($container, "업로드");
-      const uploadFileInput = getByLabelText($container, "업로드");
+      const uploadLabel = getByText($container, /업로드/);
+      const uploadFileInput = getByLabelText($container, /업로드/);
 
       expect(uploadLabel).toBeInTheDocument();
       expect(uploadFileInput).toBeInTheDocument();
