@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,24 +9,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css"
     />
-    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div id="app">
-      <h1>서치라이트 블로그 포매터</h1>
-      <div id="instruction">
-        <p id="notion-file-input">
-          노션에서 <strong>HTML로 내보낸 파일</strong>을
-          <input id="notion-file" type="file" accept=".html" /><label
-            for="notion-file"
-            >업로드</label
-          >
-          해주세요
-        </p>
-        <p id="warning" style="display: none"></p>
-      </div>
-      <textarea readonly></textarea>
-    </div>
-    <script type="module" src="./script/index.ts"></script>
+    <div id="app"></div>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

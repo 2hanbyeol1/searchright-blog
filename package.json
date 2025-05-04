@@ -6,10 +6,29 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint src --ext .ts,.tsx --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@types/node": "^22.15.3",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.3.1",
+    "globals": "^16.0.0",
+    "jsdom": "^26.0.0",
+    "sass-embedded": "^1.87.0",
     "typescript": "~5.6.2",
-    "vite": "^5.4.10"
+    "typescript-eslint": "^8.31.1",
+    "vite": "^5.4.10",
+    "vitest": "^3.1.1"
+  },
+  "dependencies": {
+    "eslint-import-resolver-typescript": "^4.3.4"
   }
 }

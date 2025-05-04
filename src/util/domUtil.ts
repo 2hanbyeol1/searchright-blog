@@ -1,0 +1,75 @@
+import { getElementBySelector } from "./elementUtil";
+
+export function parseHTMLTextToDocument(text: string): Document {
+  const domparser = new DOMParser();
+  return domparser.parseFromString(text, "text/html");
+}
+
+export function addBrTag(
+  $element: Element,
+  numOfBr: number,
+  insertPosition: "before" | "after",
+) {
+  const isBefore = insertPosition === "before";
+  const sibiling = isBefore
+    ? $element.previousElementSibling
+    : $element.nextElementSibling;
+
+  if (!(sibiling instanceof HTMLBRElement))
+    $element.insertAdjacentHTML(
+      isBefore ? "beforebegin" : "afterend",
+      "<br/>".repeat(numOfBr),
+    );
+}
+
+export function isHrefFromExternalSite($a: HTMLAnchorElement) {
+  const href = $a.getAttribute("href");
+  return href && !href.includes("searchright.net");
+}
+
+export function processImage($figureImg: Element) {
+  const $a = $figureImg.querySelector<HTMLAnchorElement>("a");
+  const $img = $figureImg.querySelector<HTMLImageElement>("img");
+  const $figcaption = $figureImg.querySelector<HTMLElement>("figcaption");
+  if (!($a && $img)) return;
+
+  $a.replaceWith($img); // 감싸진 a 태그 삭제
+  $img.removeAttribute("style"); // img에 적용된 width style 삭제
+  $img.setAttribute("src", "!!!!! 이미지를 base64로 변환해주세요");
+  $img.setAttribute(
+    "alt",
+    $figcaption?.innerText || "!!!!! 이미지의 대체 텍스트를 입력해주세요",
+  ); // alt 추가 (figcaption으로)
+}
+
+export function processCallout($figureCallout: Element) {
+  $figureCallout.removeAttribute("style");
+
+  // figure-callout에 icon 첫번째 태그로 옮기기
+  const $icon = $figureCallout.querySelector<HTMLDivElement>(".icon");
+  if (!$icon) return;
+  const icon = $icon.innerText;
+  $icon.parentElement?.remove();
+
+  let $child = $figureCallout.firstElementChild as HTMLElement | null;
+  if (!$child) return;
+  while ($child.firstElementChild)
+    $child = $child.firstElementChild as HTMLElement;
+  $child.innerText = `${icon}${"  " + $child.innerText || ""}`;
+}
+
+// 맨 처음에 나오는 h2, figure 등에 의해 생기는 br 태그들 삭제
+export function removeFirstBrs($article: Element) {
+  const $pageBody = getElementBySelector(".page-body", $article);
+
+  let attempts = 0;
+  const MAX_ATTEMPTS = 1000; // 안전장치
+  while (attempts < MAX_ATTEMPTS) {
+    const firstNode = $pageBody.firstChild;
+    if (!firstNode || !(firstNode instanceof HTMLBRElement)) break;
+    firstNode.remove();
+    attempts++;
+  }
+
+  if (attempts === MAX_ATTEMPTS) console.warn("최대 반복 횟수에 도달했습니다.");
+}
