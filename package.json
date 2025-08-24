@@ -16,7 +16,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/node": "^22.15.3",
-    "eslint": "^9.26.0",
+    "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.3.1",
